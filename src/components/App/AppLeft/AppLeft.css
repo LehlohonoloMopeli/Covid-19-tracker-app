@@ -1,0 +1,5 @@
+.app__left_infoBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }

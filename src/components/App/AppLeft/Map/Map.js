@@ -1,5 +1,6 @@
 import React from 'react'
-import './Map.css'
+import { Map as LeafletMap, TileLayer } from 'react-leaflet';
+import './Map.css';
 
 function Map() {
     return (
