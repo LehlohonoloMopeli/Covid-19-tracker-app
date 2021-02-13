@@ -18,6 +18,7 @@ function App() {
     const[mapZoom, setMapZoom] = useState(3);
     const[mapCountries, setMapCountries] = useState([]);
     const[casesType, setCasesType] = useState('cases');
+    const[error, setError] = useState('');
  
     const countryChange = async (event) => {
         const countryCode = event.target.value;
@@ -28,14 +29,18 @@ function App() {
                 ? "https://disease.sh/v3/covid-19/all" 
                 : `https://disease.sh/v3/covid-19/countries/${countryCode}`
 
-        await fetch(url)
+        try {
+            await fetch(url)
             .then(response => response.json())
             .then(data => {
                 setCountry(countryCode);        // Change it since we made a new request (meaning country code changed)
                 setCountryInfo(data);
                 setMapCenter({ lat: data.countryInfo.lat, lng: data.countryInfo.long });    // Remember to Condition for worldwide case 
                 setMapZoom(5);
-        })
+        });
+        } catch (error) {
+            setError('');
+        }
     }
 
 
@@ -117,13 +122,29 @@ function App() {
                 </div>
 
 
-                {/* Map */}
-                <Map 
+                {
+                    country === 'worldwide'
+                    ? <Map 
+                    casesType={casesType}
+                    countries={mapCountries}
+                    center={{ lat: -29, lng: 24 }}              // Remember to Condition for worldwide case 
+                    zoom={mapZoom}
+                    />
+                    : <Map 
+                    casesType={casesType}
+                    countries={mapCountries}
+                    center={mapCenter}              // Remember to Condition for worldwide case 
+                    zoom={mapZoom}
+                    />
+                }
+
+
+                {/* <Map 
                 casesType={casesType}
                 countries={mapCountries}
                 center={mapCenter}              // Remember to Condition for worldwide case 
                 zoom={mapZoom}
-                />
+                /> */}
 
             </div>
             
