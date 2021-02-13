@@ -7,12 +7,12 @@ const casesTypeColors = {
         multiplier: 300,
     },
     recovered: {
-        hex: '#7dd71d',
-        multiplier: 1200,
+        hex: '#00ff00',
+        multiplier: 300,
     },
     deaths: {
         hex: '#fb4443',
-        multiplier: 2000,
+        multiplier: 1000,
     },
 };
 
@@ -41,7 +41,12 @@ export const ChangeView = ( {center, zoom } ) => {
 }
 
 
-export const showDataOnMap = ( countries , casesType='cases' ) =>
+export const prettyPrintStat = (stat) => (
+    stat ? `+${numeral(stat).format("0.0a")}` : "+0"
+    ) 
+    
+
+export const showDataOnMap = ( countries , casesType ) =>
 countries.map((country) => (
         <Circle
         center={[country.countryInfo.lat, country.countryInfo.long]}

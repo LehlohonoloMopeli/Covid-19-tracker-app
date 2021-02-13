@@ -56,7 +56,7 @@ const buildChartData = (data, casesType) => {
         if (lastDataPoint) {
             const newDataPoint = {
                 x: date,
-                y: data[casesType][date] - lastDataPoint
+                y: Math.max(data[casesType][date] - lastDataPoint, 0)
             }
             chartData.push(newDataPoint);
         }
@@ -65,7 +65,7 @@ const buildChartData = (data, casesType) => {
     return chartData;
 };
 
-function LineGraph({ casesType = 'cases' }) {
+function LineGraph({ casesType }) {
 
     const[data, setData] = useState({});
 
