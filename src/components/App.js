@@ -14,7 +14,7 @@ function App() {
     const[country, setCountry] = useState('worldwide');     // Stores the country code selected only
     const[countryInfo, setCountryInfo] = useState({});      // Store the data we pull here
     const[tableData, setTableData] = useState([]);
-    const[mapCenter, setMapCenter] = useState({ lat: -29, lng: 24 });
+    const[mapCenter, setMapCenter] = useState({ lat: -29, lng: 24 });       // Remember to Condition for worldwide case 
     const[mapZoom, setMapZoom] = useState(3);
     const[mapCountries, setMapCountries] = useState([]);
     const[casesType, setCasesType] = useState('cases');
@@ -33,8 +33,7 @@ function App() {
             .then(data => {
                 setCountry(countryCode);        // Change it since we made a new request (meaning country code changed)
                 setCountryInfo(data);
-                // setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-                setMapCenter({ lat: data.countryInfo.lat, lng: data.countryInfo.long });
+                setMapCenter({ lat: data.countryInfo.lat, lng: data.countryInfo.long });    // Remember to Condition for worldwide case 
                 setMapZoom(5);
         })
     }
@@ -122,7 +121,7 @@ function App() {
                 <Map 
                 casesType={casesType}
                 countries={mapCountries}
-                center={mapCenter} 
+                center={mapCenter}              // Remember to Condition for worldwide case 
                 zoom={mapZoom}
                 />
 
@@ -131,16 +130,17 @@ function App() {
             
             <Card className='app__right'>
                 <CardContent>
+
                     <div className='app__right__table'>
                         <h3>Live cases by country</h3>
                         <Table countries={tableData}/>
-                        
                     </div>
+
                     <div className='app__right__graph'>
                         <h3>Worldwide new {casesType}</h3>
                         <LineGraph casesType={casesType}/>
-                        
                     </div>
+
                 </CardContent>
             </Card>
 

@@ -13,6 +13,14 @@ body {
     padding: 20px;
 }
 
+.app__header__title {
+    color: #fc3c3c !important;
+}
+
+.app__header__dropdown {
+    background-color: white !important;
+}
+
 .app__left {
     flex: 0.9;
   }
@@ -20,6 +28,15 @@ body {
   @media (max-width: 900px) {
     .app {
       flex-direction: column;
+    }
+
+    .app__right {
+        margin-top: 20px !important;
+        margin-bottom: 50px !important;
+    }
+
+    .app__right__graph {
+        margin-top: 50px !important;
     }
   }
 
